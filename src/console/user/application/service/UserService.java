@@ -13,5 +13,5 @@ public interface UserService {
 
     List<User> getAll();
 
-    void delete(String name, String secondName);
+    boolean delete(String name, String secondName);
 }

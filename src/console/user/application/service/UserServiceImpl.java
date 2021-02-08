@@ -1,7 +1,6 @@
 package console.user.application.service;
 
 import console.user.application.model.User;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -34,7 +33,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User get(String name, String secondName) {
-        String fileName = name + secondName;
+        String fileName = name.trim() + secondName.trim();
         User user = null;
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("users/" + fileName.toLowerCase()))) {
             user = (User) inputStream.readObject();
@@ -59,13 +58,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void delete(String name, String secondName) {
-        String fileName = name + secondName;
+    public boolean delete(String name, String secondName) {
+        String fileName = name.trim() + secondName.trim();
         try {
             Files.delete(Paths.get("users/" + fileName.toLowerCase()));
+
             System.out.println("Файл " + fileName + " успешно удален");
         } catch (IOException e) {
-            e.printStackTrace();
+            return false;
         }
+        return true;
     }
 }

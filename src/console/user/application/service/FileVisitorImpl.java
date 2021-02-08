@@ -1,7 +1,6 @@
 package console.user.application.service;
 
 import console.user.application.model.User;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
